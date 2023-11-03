@@ -41,14 +41,14 @@ export default function RegistrationScreen() {
 								placeholderTextColor="#BDBDBD"
 							/>
 							<TouchableOpacity style={styles.showHide}>
-								<Text>Показати</Text>
+								<Text style={styles.text}>Показати</Text>
 							</TouchableOpacity>
 						</View>
 					</View>
 					<RegButton title="Зареєструватися"></RegButton>
 					<View style={styles.linkContainer}>
-						<Text style={styles.linkText}>Вже є акаунт? </Text>
-						<LinkTo title="Увійти"></LinkTo>
+						<Text style={styles.text}>Вже є акаунт? </Text>
+						<LinkTo title="Увійти" style={styles.text}></LinkTo>
 					</View>
 				</View>
 			</ImageBackground>
@@ -65,17 +65,19 @@ const styles = StyleSheet.create({
 		width: "100%",
 		height: "69%",
 		backgroundColor: "#ffffff",
-		padding: 20,
+		paddingLeft: 20,
+		paddingRight: 20,
 		borderTopLeftRadius: 25,
 		borderTopRightRadius: 25,
 	},
 	title: {
 		fontSize: 30,
-		fontFamily: "Roboto-Regular",
+		fontFamily: "Roboto-Medium",
 		fontWeight: "normal",
 		marginTop: 92,
 		marginBottom: 33,
 		textAlign: "center",
+		letterSpacing: 0.3,
 	},
 	inputContainer: {
 		marginBottom: 43,
@@ -101,7 +103,7 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 	},
-	linkText: {
+	text: {
 		color: "#1B4371",
 		fontFamily: "Roboto-Regular",
 		fontSize: 16,
