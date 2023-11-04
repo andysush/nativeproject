@@ -1,5 +1,7 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { Feather } from "@expo/vector-icons";
 
 export default function PostsScreen() {
 	return (
@@ -17,12 +19,28 @@ export default function PostsScreen() {
 					<Text style={styles.mail}>email@example.com</Text>
 				</View>
 			</View>
+			<View style={styles.footer}>
+				<TouchableOpacity style={styles.grid}>
+					<Ionicons
+						name="grid-outline"
+						size={24}
+						color="rgba(33, 33, 33, 0.8)"
+					/>
+				</TouchableOpacity>
+				<TouchableOpacity style={styles.add}>
+					<Ionicons name="add" size={24} color="#fff" />
+				</TouchableOpacity>
+				<TouchableOpacity style={styles.user}>
+					<Feather name="user" size={24} color="rgba(33, 33, 33, 0.8)" />
+				</TouchableOpacity>
+			</View>
 		</View>
 	);
 }
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		justifyContent: "space-between",
 	},
 	header: {
 		width: "100%",
@@ -45,11 +63,12 @@ const styles = StyleSheet.create({
 		marginLeft: 90,
 	},
 	owner: {
+		flex: 1,
 		flexDirection: "row",
-		justifyContent: "start",
-		alignItems: "center",
+		justifyContent: "flex-start",
 		paddingHorizontal: 16,
 		paddingTop: 32,
+		width: "100%",
 	},
 	avatar: {
 		width: 60,
@@ -59,8 +78,7 @@ const styles = StyleSheet.create({
 	},
 	ownerInfo: {
 		flexDirection: "column",
-		justifyContent: "center",
-		alignItems: "flex-start",
+		alignItems: "center",
 	},
 	name: {
 		fontFamily: "Roboto-Bold",
@@ -71,5 +89,28 @@ const styles = StyleSheet.create({
 		fontFamily: "Roboto-Regular",
 		fontSize: 11,
 		color: "rgba(33, 33, 33, 0.80)",
+	},
+	footer: {
+		height: 83,
+		flexDirection: "row",
+		justifyContent: "space-around",
+		alignItems: "baseline",
+		paddingVertical: 9,
+		borderTopWidth: 1,
+		borderTopColor: "rgba(0, 0, 0, 0.30)",
+	},
+	grid: {
+		marginLeft: 90,
+	},
+	add: {
+		width: 70,
+		height: 40,
+		backgroundColor: "#FF6C00",
+		justifyContent: "center",
+		alignItems: "center",
+		borderRadius: 20,
+	},
+	user: {
+		marginRight: 90,
 	},
 });

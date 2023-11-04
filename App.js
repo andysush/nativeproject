@@ -12,9 +12,9 @@ export default function App() {
 	});
 	return (
 		<>
-			{/* <RegistrationScreen /> */}
+			<RegistrationScreen />
 			{/* <LoginScreen /> */}
-			<PostsScreen />
+			{/* <PostsScreen /> */}
 			<StatusBar style="auto" />
 		</>
 	);
