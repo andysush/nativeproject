@@ -1,9 +1,9 @@
 import React from "react";
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
 
-export const RegButton = ({ title }) => {
+export const RegButton = ({ title, onPress }) => {
 	return (
-		<TouchableOpacity style={styles.button}>
+		<TouchableOpacity style={styles.button} onPress={onPress}>
 			<Text style={styles.buttonText}>{title}</Text>
 		</TouchableOpacity>
 	);

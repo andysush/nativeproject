@@ -10,10 +10,15 @@ export default function App() {
 		"Roboto-Medium": require("./assets/fonts/Roboto-Medium.ttf"),
 		"Roboto-Bold": require("./assets/fonts/Roboto-Bold.ttf"),
 	});
+
+	if (!fontsLoaded) {
+		return null;
+	}
+
 	return (
 		<>
-			<RegistrationScreen />
-			{/* <LoginScreen /> */}
+			{/* <RegistrationScreen /> */}
+			<LoginScreen />
 			{/* <PostsScreen /> */}
 			<StatusBar style="auto" />
 		</>

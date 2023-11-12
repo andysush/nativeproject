@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
 	View,
 	Text,
@@ -6,6 +6,11 @@ import {
 	StyleSheet,
 	ImageBackground,
 	TouchableOpacity,
+	KeyboardAvoidingView,
+	Platform,
+	TouchableWithoutFeedback,
+	Keyboard,
+	Alert,
 } from "react-native";
 import { RegButton } from "../shared/RegButton";
 import { LinkTo } from "../shared/LinkTo";
@@ -13,46 +18,78 @@ import image from "../assets/photoBg.png";
 import { AvatarPic } from "../shared/AvatarPic";
 
 export default function RegistrationScreen() {
-	return (
-		<View style={styles.container}>
-			<ImageBackground source={image} resizeMode="cover" style={styles.image}>
-				<View style={styles.regForm}>
-					<AvatarPic></AvatarPic>
-					<Text style={styles.title}>Реєстрація</Text>
+	const [name, setName] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [showPassword, setShowPassword] = useState(false);
 
-					<View style={styles.inputContainer}>
-						<TextInput
-							style={styles.input}
-							cursorColor="#212121"
-							placeholder="Логін"
-							placeholderTextColor="#BDBDBD"
-						></TextInput>
-						<TextInput
-							style={styles.input}
-							cursorColor="#212121"
-							placeholder="Адреса електронної пошти"
-							placeholderTextColor="#BDBDBD"
-						></TextInput>
-						<View>
-							<TextInput
-								style={styles.input}
-								cursorColor="#212121"
-								placeholder="Пароль"
-								placeholderTextColor="#BDBDBD"
-							/>
-							<TouchableOpacity style={styles.showHide}>
-								<Text style={styles.text}>Показати</Text>
-							</TouchableOpacity>
+	const onRegistration = () => {
+		console.log(
+			"Credentials:",
+			`name:${name},email:${email},password:${password}`
+		);
+	};
+
+	return (
+		<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+			<View style={styles.container}>
+				<ImageBackground source={image} resizeMode="cover" style={styles.image}>
+					<View style={styles.regForm}>
+						<AvatarPic></AvatarPic>
+						<Text style={styles.title}>Реєстрація</Text>
+						<View style={styles.inputContainer}>
+							<KeyboardAvoidingView
+								behavior={Platform.OS == "ios" ? "padding" : "height"}
+							>
+								<TextInput
+									value={name}
+									onChangeText={setName}
+									style={styles.input}
+									cursorColor="#212121"
+									placeholder="Логін"
+									placeholderTextColor="#BDBDBD"
+								></TextInput>
+								<TextInput
+									value={email}
+									onChangeText={setEmail}
+									style={styles.input}
+									cursorColor="#212121"
+									placeholder="Адреса електронної пошти"
+									placeholderTextColor="#BDBDBD"
+								></TextInput>
+								<View>
+									<TextInput
+										style={styles.input}
+										value={password}
+										onChangeText={setPassword}
+										secureTextEntry={!showPassword}
+										cursorColor="#212121"
+										placeholder="Пароль"
+										placeholderTextColor="#BDBDBD"
+									/>
+									<TouchableOpacity
+										style={styles.showHide}
+										onPress={() => setShowPassword(!showPassword)}
+									>
+										<Text style={styles.text}>
+											{!showPassword ? "Показати" : "Скрити"}
+										</Text>
+									</TouchableOpacity>
+								</View>
+							</KeyboardAvoidingView>
+						</View>
+						<RegButton
+							title="Зареєструватися"
+							onPress={onRegistration}
+						></RegButton>
+						<View style={styles.linkContainer}>
+							<Text style={styles.text}>Вже є акаунт?</Text>
+							<LinkTo title="Увійти" style={styles.text}></LinkTo>
 						</View>
 					</View>
-					<RegButton title="Зареєструватися"></RegButton>
-					<View style={styles.linkContainer}>
-						<Text style={styles.text}>Вже є акаунт? </Text>
-						<LinkTo title="Увійти" style={styles.text}></LinkTo>
-					</View>
-				</View>
-			</ImageBackground>
-		</View>
+				</ImageBackground>
+			</View>
+		</TouchableWithoutFeedback>
 	);
 }
 
@@ -62,8 +99,8 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 	},
 	regForm: {
+		flex: 0.69,
 		width: "100%",
-		height: "69%",
 		backgroundColor: "#ffffff",
 		paddingLeft: 20,
 		paddingRight: 20,
