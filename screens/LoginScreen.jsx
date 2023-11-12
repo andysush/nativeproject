@@ -5,44 +5,67 @@ import {
 	StyleSheet,
 	ImageBackground,
 	TouchableOpacity,
+	TouchableWithoutFeedback,
+	Keyboard,
 } from "react-native";
 import { RegButton } from "../shared/RegButton";
 import { LinkTo } from "../shared/LinkTo";
 import image from "../assets/photoBg.png";
+import { useState } from "react";
 
 export default function LoginScreen() {
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [showPassword, setShowPassword] = useState(false);
+
+	const onLogin = () => {
+		console.log("Credentials:", `email:${email},password:${password}`);
+	};
+
 	return (
-		<View style={styles.container}>
-			<ImageBackground source={image} resizeMode="cover" style={styles.image}>
-				<View style={styles.regForm}>
-					<Text style={styles.title}>Увійти</Text>
-					<View style={styles.inputContainer}>
-						<TextInput
-							style={styles.input}
-							cursorColor="#212121"
-							placeholder="Адреса електронної пошти"
-							placeholderTextColor="#BDBDBD"
-						></TextInput>
-						<View>
+		<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+			<View style={styles.container}>
+				<ImageBackground source={image} resizeMode="cover" style={styles.image}>
+					<View style={styles.regForm}>
+						<Text style={styles.title}>Увійти</Text>
+						<View style={styles.inputContainer}>
 							<TextInput
 								style={styles.input}
+								value={email}
+								onChangeText={setEmail}
 								cursorColor="#212121"
-								placeholder="Пароль"
+								placeholder="Адреса електронної пошти"
 								placeholderTextColor="#BDBDBD"
-							/>
-							<TouchableOpacity style={styles.showHide}>
-								<Text style={styles.text}>Показати</Text>
-							</TouchableOpacity>
+							></TextInput>
+							<View>
+								<TextInput
+									style={styles.input}
+									value={password}
+									onChangeText={setPassword}
+									secureTextEntry={!showPassword}
+									cursorColor="#212121"
+									placeholder="Пароль"
+									placeholderTextColor="#BDBDBD"
+								/>
+								<TouchableOpacity
+									style={styles.showHide}
+									onPress={() => setShowPassword(!showPassword)}
+								>
+									<Text style={styles.text}>
+										{!showPassword ? "Показати" : "Скрити"}
+									</Text>
+								</TouchableOpacity>
+							</View>
+						</View>
+						<RegButton title="Увійти" onPress={onLogin}></RegButton>
+						<View style={styles.linkContainer}>
+							<Text style={styles.text}>Немає акаунту? </Text>
+							<LinkTo title="Зареєструватися" style={styles.text}></LinkTo>
 						</View>
 					</View>
-					<RegButton title="Увійти"></RegButton>
-					<View style={styles.linkContainer}>
-						<Text style={styles.text}>Немає акаунту? </Text>
-						<LinkTo title="Зареєструватися" style={styles.text}></LinkTo>
-					</View>
-				</View>
-			</ImageBackground>
-		</View>
+				</ImageBackground>
+			</View>
+		</TouchableWithoutFeedback>
 	);
 }
 
